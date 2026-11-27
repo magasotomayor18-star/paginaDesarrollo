@@ -37,4 +37,6 @@ La migración Prisma actual define cuatro modelos básicos (`Producto`, `Usuario
 
 Cada push o pull request a `main` valida la sintaxis JavaScript, el catálogo JSON, las pruebas API, el esquema/generación de Prisma, dependencias y código con CodeQL. GitHub Pages despliega únicamente el frontend después de superar todas las comprobaciones.
 
+Para habilitar el despliegue, configura en GitHub **Settings → Pages → Build and deployment → Source: GitHub Actions**.
+
 El pipeline no ejecuta migraciones ni pruebas de integración contra SQL Server; se requiere una instancia configurada para esa validación.
