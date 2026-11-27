@@ -1,20 +1,25 @@
 const express = require("express");
 
-const app = express();
-const PORT = 3000;
+function createApp() {
+  const app = express();
 
-// Permite recibir datos en formato JSON.
-app.use(express.json());
+  app.use(express.json());
 
-// Ruta para comprobar que el backend funciona.
-app.get("/api/health", (req, res) => {
-  res.json({
-    ok: true,
-    mensaje: "Backend de Brasa Urbana funcionando 🍔",
+  app.get("/api/health", (req, res) => {
+    res.json({
+      ok: true,
+      mensaje: "Backend de Brasa Urbana funcionando 🍔",
+    });
   });
-});
 
-// Inicia el servidor.
-app.listen(PORT, () => {
-  console.log(`Servidor disponible en http://localhost:${PORT}`);
-});
+  return app;
+}
+
+if (require.main === module) {
+  const port = Number(process.env.PORT) || 3000;
+  createApp().listen(port, () => {
+    console.log(`Servidor disponible en http://localhost:${port}`);
+  });
+}
+
+module.exports = createApp;
