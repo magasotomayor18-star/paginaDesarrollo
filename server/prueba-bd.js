@@ -1,4 +1,4 @@
-const prisma = require("./models/prisma");
+import prisma from "./models/prisma.js";
 
 async function probarConexion() {
   try {

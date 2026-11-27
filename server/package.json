@@ -3,19 +3,29 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "engines": {
+    "node": ">=22.18.0"
+  },
   "scripts": {
-    "test": "node --test"
+    "start": "node index.js",
+    "test": "node --test",
+    "db:generate": "prisma generate",
+    "db:validate": "prisma validate"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "type": "commonjs",
+  "type": "module",
   "dependencies": {
-    "@prisma/client": "^6.19.0",
+    "@prisma/adapter-mssql": "7.10.1",
+    "@prisma/client": "7.10.1",
     "dotenv": "^18.0.10",
     "express": "^5.3.0"
   },
   "devDependencies": {
-    "prisma": "^6.19.0"
+    "prisma": "7.10.1"
+  },
+  "overrides": {
+    "effect": "3.22.1"
   }
 }

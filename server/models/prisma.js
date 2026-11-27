@@ -1,7 +1,12 @@
-require("dotenv").config();
+import "dotenv/config";
+import { PrismaMssql } from "@prisma/adapter-mssql";
+import { PrismaClient } from "../generated/prisma/client.ts";
+import { parseSqlServerConnectionString } from "./sql-server-connection.js";
 
-const { PrismaClient } = require("@prisma/client");
+const adapter = new PrismaMssql(
+  parseSqlServerConnectionString(process.env.DATABASE_URL),
+);
 
-const prisma = new PrismaClient();
+const prisma = new PrismaClient({ adapter });
 
-module.exports = prisma;
+export default prisma;

@@ -61,17 +61,17 @@ jobs:
       - name: Check JavaScript syntax
         run: find . -path './node_modules' -prune -o -name '*.js' -type f -print0 | xargs -0 -r -n1 node --check
 
-      - name: Run API tests
-        run: npm test
-
       - name: Validate Prisma schema
-        run: npx prisma validate
+        run: npm run db:validate
 
       - name: Generate Prisma client
-        run: npx prisma generate
+        run: npm run db:generate
+
+      - name: Run API and SQL Server adapter tests
+        run: npm test
 
       - name: Audit all dependencies
-        run: npm audit --audit-level=high
+        run: npm audit --audit-level=low
 
   security:
     name: CodeQL analysis

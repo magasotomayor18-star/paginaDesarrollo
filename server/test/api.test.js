@@ -1,7 +1,8 @@
-const assert = require("node:assert/strict");
-const { createServer } = require("node:http");
-const test = require("node:test");
-const createApp = require("../index");
+import assert from "node:assert/strict";
+import { createServer } from "node:http";
+import test from "node:test";
+import { createApp } from "../index.js";
+import prisma from "../models/prisma.js";
 
 test("GET /api/health reports backend status", async (t) => {
   const server = createServer(createApp());
@@ -22,4 +23,9 @@ test("GET /api/health reports backend status", async (t) => {
   const body = await response.json();
   assert.equal(body.ok, true);
   assert.match(body.mensaje, /Backend de Brasa Urbana funcionando/);
+});
+
+test("creates a Prisma product delegate with the SQL Server adapter", async () => {
+  assert.equal(typeof prisma.producto.count, "function");
+  await prisma.$disconnect();
 });
